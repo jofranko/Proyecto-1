@@ -1,11 +1,11 @@
-import Usuario from './usuario.model';
+import UsuarioModel from './usuario.model';
 
 //POST /usuario
 //El endpoint crea un usuario en la base de datos con los datos enviados al backend. 
-export async function createUsuario(req, res) {
+export async function postUsuario(req, res) {
     try {
-        const { email, name, password, phone, address, role } = req.body;
-        const usuario = new Usuario({ email, name, password, phone, address, role });
+        const { name, email, password, phone, address, role } = req.body;
+        const usuario = new UsuarioModel({  name, email, password, phone, address, role });
         const resultado = await usuario.save();
         res.status(200).json(resultado);
     } catch (err) {
@@ -13,13 +13,24 @@ export async function createUsuario(req, res) {
     }
 }
 
-//GET /usuario
-//El endpoint retorna los datos del usuario que corresponden a las credenciales (correo y contraseña) o al id enviados al backend.
-export async function getUsuario(req, res) {
+//GET /usuario por id
+//El endpoint retorna los datos del usuario que corresponden al id proveida.
+export async function getUsuarioById(req, res) {
     try {
-        const { id, email, password } = req.params;
-        let usuario
-        id ? usuario = await Usuario.findOne({ _id: id, isDeleted: false}) : usuario = await Usuario.findOne({ email: email, password: password,isDeleted: false})
+        const { id } = req.params;
+        const usuario = await UsuarioModel.findOne({ _id: id, isDeleted: false})
+        res.status(200).json(usuario);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+
+//GET /usuario por correo y contraseña
+//El endpoint retorna los datos del usuario que corresponden a las credenciales correo y contraseña.
+export async function getUsuarioByEmailAndPassword(req, res) {
+    try {
+        const { email, password} = req.query;
+        const usuario = await UsuarioModel.findOne({ email: email, password: password, isDeleted: false})
         res.status(200).json(usuario);
     } catch (err) {
         res.status(500).json(err);
@@ -30,14 +41,7 @@ export async function getUsuario(req, res) {
 //El endpoint modifica los datos del usuario que corresponde a la id proveída, usando los datos proveídos.
 export async function patchUsuario(req, res) {
     try {
-        const { id, email, name, password, phone, address, role } = req.body;
-        const usuario = await Usuario.findOne({ _id: id, isDeleted: false});
-        usuario.email = email;
-        usuario.name = name;
-        usuario.password = password;
-        usuario.phone = phone;
-        usuario.address = address;
-        usuario.role = role;
+        const usuario = await UsuarioModel.findOneAndUpdate({ _id: req.params.id}, req.body, { new: true});
         const resultado = await usuario.save();
         res.status(200).json(resultado);
     } catch (err) {
@@ -49,9 +53,7 @@ export async function patchUsuario(req, res) {
 //El endpoint “inhabilita” un usuario que corresponde a la id proveída.
 export async function deleteUsuario(req, res) {
     try {
-        const { id } = req.body;
-        const usuario = await Usuario.findOne({ _id: id, isDeleted: false});
-        usuario.isDeleted = true;
+        const usuario = await UsuarioModel.findOneAndUpdate({ _id: req.params.id}, {isDeleted: true}, {new: true});
         const resultado = await usuario.save();
         res.status(200).json(resultado);
     } catch (err) {
