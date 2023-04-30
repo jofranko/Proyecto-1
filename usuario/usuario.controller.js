@@ -41,7 +41,7 @@ export async function getUsuarioByEmailAndPassword(req, res) {
 //El endpoint modifica los datos del usuario que corresponde a la id proveída, usando los datos proveídos.
 export async function patchUsuario(req, res) {
     try {
-        const usuario = await UsuarioModel.findOneAndUpdate({ _id: req.params.id}, req.body, { new: true});
+        const usuario = await UsuarioModel.findOneAndUpdate({ _id: req.params.id, isDeleted: false}, req.body, { new: true});
         const resultado = await usuario.save();
         res.status(200).json(resultado);
     } catch (err) {
@@ -53,7 +53,7 @@ export async function patchUsuario(req, res) {
 //El endpoint “inhabilita” un usuario que corresponde a la id proveída.
 export async function deleteUsuario(req, res) {
     try {
-        const usuario = await UsuarioModel.findOneAndUpdate({ _id: req.params.id}, {isDeleted: true}, {new: true});
+        const usuario = await UsuarioModel.findOneAndUpdate({ _id: req.params.id, isDeleted: false}, {isDeleted: true}, {new: true});
         const resultado = await usuario.save();
         res.status(200).json(resultado);
     } catch (err) {
