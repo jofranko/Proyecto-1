@@ -4,8 +4,8 @@ import PedidoModel from './pedido.model';
 //El endpoint crea un pedido de un usuario a un restaurante en la base de datos con los datos enviados al backend.
 export async function postPedido(req, res) {
     try {
-        const { name, description, category, address, phone, logo } = req.body;
-        const pedido = new PedidoModel({ name, description, category, address, phone, logo });
+        const { user_id, restaurant_id,delivery_id, name, description, category, quantity, total, address,phone } = req.body;
+        const pedido = new PedidoModel({ user_id, restaurant_id, delivery_id,name, description, category, quantity, total, address,phone });
         const resultado = await pedido.save();
         res.status(200).json(resultado);
     } catch (err) {
@@ -17,22 +17,31 @@ export async function postPedido(req, res) {
 //El endpoint retorna los datos del pedido que corresponde a la id proveída. 
 export async function getPedido(req, res) {
     try {
-        const resultado = await PedidoModel.findById({ _id: req.params.id, isDeleleted: false});
+        const resultado = await PedidoModel.findOne({ _id: req.params.id, isDeleted: false});
         res.status(200).json(resultado);
     } catch (err) {
         res.status(500).json(err);
     }
 }
 
-//GET /pedido cantidad 1
-//El endpoint retorna los datos de los pedidos realizados por el usuario proveído, enviados por el usuario proveído, pedidos a un restaurante proveído, y/o entre las fechas proveídas.
-export async function getPedido1(req, res) {}
-
-//GET /pedido cantidad 2
-//El endpoint retorna los datos de los pedidos enviados, pero sin aceptar.
+//GET /pedido 2
+//El endpoint retorna los datos de los pedidos realizados por el usuario proveído, enviados por el usuario proveído, pedidos a un restaurante proveído
 export async function getPedido2(req, res) {
     try {
-        const resultado = await PedidoModel.find({ isDeleted: false, isAccepted: false });
+        const { user_id, restaurant_id, delivery_id} = req.query;
+        const filter = {user_id: user_id, restaurant_id: restaurant_id, delivery_id: delivery_id, isDeleted: false};
+        const resultado = await PedidoModel.find(filter);
+        res.status(200).json(resultado);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+
+//GET /pedido 3
+//El endpoint retorna los datos de los pedidos enviados, pero sin aceptar.
+export async function getPedido3(req, res) {
+    try {
+        const resultado = await PedidoModel.find({ sent: true,  accepted: false, isDeleted: false });
         res.status(200).json(resultado);
     } catch (err) {
         res.status(500).json(err);
@@ -43,7 +52,13 @@ export async function getPedido2(req, res) {
 //El endpoint modifica los datos del pedido que corresponde a la id proveída, usando los datos proveídos, a menos que este ya haya sido enviado
 export async function patchPedido(req, res) {
     try {
-        const resultado = await PedidoModel.findOneAndUpdate({_id: req.params.id, isDeleted: false, isAccepted: false}, req.body, { new: true});
+        //si sent es true, no se puede modificar los datos, solo los estados
+        const pedido = await PedidoModel.findOne({_id: req.params.id, isDeleted: false}).then((pedido) => {
+        if(pedido.sent){
+            delete req.body.user_id, req.body.restaurant_id, req.body.delivery_id, req.body.name, req.body.description, req.body.category, req.body.quantity, req.body.total, req.body.address, req.body.phone;
+        }});
+        const pedido2 = await PedidoModel.findOneAndUpdate({_id: req.params.id, isDeleted: false}, req.body, { new: true});
+        const resultado = await pedido2.save();
         res.status(200).json(resultado);
     } catch (err) {
         res.status(500).json(err);
@@ -54,7 +69,8 @@ export async function patchPedido(req, res) {
 //El endpoint “inhabilita” un producto que corresponde a la id proveída.
 export async function deletePedido(req, res) {
     try {
-        const resultado = await PedidoModel.findOneAndUpdate({_id: req.params.id, isDeleted: false}, { isDeleted: true }, { new: true});
+        const pedido = await PedidoModel.findOneAndUpdate({_id: req.params.id, isDeleted: false}, { isDeleted: true }, { new: true});
+        const resultado = await pedido.save();
         res.status(200).json(resultado);
     } catch (err) {
         res.status(500).json(err);

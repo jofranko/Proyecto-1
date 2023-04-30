@@ -17,7 +17,7 @@ export async function postProducto(req, res) {
 //El endpoint retorna los datos del producto que corresponde a la id proveída. 
 export async function getProducto(req, res) {
     try {
-        const resultado = await ProductoModel.findById({ _id: req.params.id, isDeleleted: false});
+        const resultado = await ProductoModel.findById({ _id: req.params.id, isDeleted: false});
         res.status(200).json(resultado);
     } catch (err) {
         res.status(500).json(err);
@@ -29,9 +29,7 @@ export async function getProducto(req, res) {
 export async function getProductoByRestaurantAndOrCategory(req, res) {
     try {
         const { restaurant_id, category } = req.query;
-        const filter = { restaurant_id: restaurant_id,  category: category, isDeleted: false};
-        //si no se envia el parametro category, se elimina category del filtro
-        if (category == undefined) delete filter.category;
+        const filter = { restaurant_id: restaurant_id,  category: { $regex: category, $options: 'i' }, isDeleted: false};
         const resultado = await ProductoModel.find(filter);
         res.status(200).json(resultado);
     } catch (err) {

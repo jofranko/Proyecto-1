@@ -1,19 +1,22 @@
-import { postPedido , getPedido, getPedidoByCategory, patchPedido, deletePedido} from "./pedido.controller";
+import { postPedido , getPedido, getPedido2, getPedido3, patchPedido, deletePedido} from "./pedido.controller";
 import { Router } from 'express';
 const router = Router();
-// POST localhost:8080/producto/
+// POST localhost:8080/pedido/
 router.post('/', postPedido);
 
-// GET localhost:8080/producto/644e4ef4e1fae68e26c73f0b
+// GET localhost:8080/pedido/noaceptado/
+router.get('/noaceptado/', getPedido3);
+
+// GET localhost:8080/pedido?user_id=13434&restaurant_id=2234324&delivery_id=11878
+router.get('/', getPedido2);
+
+// GET localhost:8080/pedido/644ead008c2578a099a9a309
 router.get('/:id', getPedido);
 
-// GET localhost:8080/producto?restaurant_id=524415641515&category=carne
-router.get('', getPedidoByCategory);
-
-// PATCH localhost:8080/producto/644e4ef4e1fae68e26c73f0b
+// PATCH localhost:8080/pedido/644ebbf867a5dde135719893
 router.patch('/:id', patchPedido);
 
-// DELETE localhost:8080/producto/644e4ef4e1fae68e26c73f0b
+// DELETE localhost:8080/pedido/644eb222e667e8dd98807127
 router.delete('/:id', deletePedido);
 
 export default router;

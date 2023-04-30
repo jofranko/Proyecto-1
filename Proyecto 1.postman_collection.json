@@ -1,0 +1,551 @@
+{
+	"info": {
+		"_postman_id": "3fa36e0c-2bde-4b3e-979e-33bda0de4b43",
+		"name": "Proyecto 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26133322"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "postUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\":\"prueba\",\r\n  \"email\":\"prueba@gmail.co\",\r\n  \"password\":\"12345\",\r\n  \"phone\":\"+57 12321424\",\r\n  \"address\": \"calle wallaby\",\r\n  \"role\":\"cliente\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/usuario/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUsuarioById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuario/644e111b3f6e7f0b363505a5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"644e111b3f6e7f0b363505a5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUsuarioByEmailAndPassword",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuario?email=jofrankorozcoll@gmail.com&password=12345",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "jofrankorozcoll@gmail.com"
+								},
+								{
+									"key": "password",
+									"value": "12345"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patchUsuario",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"isDeleted\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/usuario/644e3d2b86f014ea7cb929c0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"644e3d2b86f014ea7cb929c0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUsuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/usuario/644e3d2b86f014ea7cb929c0",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"644e3d2b86f014ea7cb929c0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Producto",
+			"item": [
+				{
+					"name": "postProducto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"restaurant_id\":\"524415641515\",\r\n  \"name\":\"pepino\",\r\n  \"description\" : \"pepino hecho a la plancha\",\r\n  \"category\":\"verdura\",\r\n  \"price\":\"22200\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/producto/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"producto",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProducto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/producto/644e4ef4e1fae68e26c73f0b",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"producto",
+								"644e4ef4e1fae68e26c73f0b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProductoByRestaurantAndOrCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/producto?restaurant_id=524415641515&category=carne",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"producto"
+							],
+							"query": [
+								{
+									"key": "restaurant_id",
+									"value": "524415641515"
+								},
+								{
+									"key": "category",
+									"value": "carne"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patchProducto",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"category\": \"carne\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/producto/644e4ef4e1fae68e26c73f0b",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"producto",
+								"644e4ef4e1fae68e26c73f0b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProducto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/producto/644e4ef4e1fae68e26c73f0b",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"producto",
+								"644e4ef4e1fae68e26c73f0b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Restaurante",
+			"item": [
+				{
+					"name": "postRestaurante",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\":\"lofan\",\r\n  \"address\":\"calle p cherman\",\r\n  \"category\" : \"perros calientes\",\r\n  \"description\":\"perros de todo tipo\",\r\n  \"inventory\":[]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/restaurante/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurante",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRestaurante",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/restaurante/644e9b160b87b4cb872584dc",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurante",
+								"644e9b160b87b4cb872584dc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getRestauranteByCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/restaurante?name=bak&category=a",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurante"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "bak"
+								},
+								{
+									"key": "category",
+									"value": "a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patchRestaurante",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"arepas de queso de todo tipo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/restaurante/644e9b160b87b4cb872584dc",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurante",
+								"644e9b160b87b4cb872584dc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteRestaurante",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/restaurante/644e9bf80b87b4cb872584e4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"restaurante",
+								"644e9bf80b87b4cb872584e4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "postRestaurante",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\":\"13434\",\r\n  \"restaurant_id\":\"2234324\",\r\n  \"delivery_id\":\"11878\",\r\n  \"name\" : \"perros calientes\",\r\n  \"description\":\"perros de queso\",\r\n  \"category\": \"arepa\",\r\n  \"quantity\": 3,\r\n  \"total\": 10000,\r\n  \"address\":\"calle la loma\",\r\n  \"phone\":\"+568276\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pedido/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedido",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/pedido/644eb00674503dcd717ecbc5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedido",
+								"644eb00674503dcd717ecbc5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPedido2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/pedido?user_id=13434&restaurant_id=2234324&delivery_id=11878",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedido"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "13434"
+								},
+								{
+									"key": "restaurant_id",
+									"value": "2234324"
+								},
+								{
+									"key": "delivery_id",
+									"value": "11878"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPedido3",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/pedido/noaceptado/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedido",
+								"noaceptado",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patchPedido",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sent\": false,\r\n    \"user_id\": \"aaaa\",\r\n    \"restaurant_id\": \"22222\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/pedido/644ebbf867a5dde135719893",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedido",
+								"644ebbf867a5dde135719893"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePedido",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/pedido/644eb222e667e8dd98807127",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pedido",
+								"644eb222e667e8dd98807127"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
