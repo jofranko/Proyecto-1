@@ -27,11 +27,16 @@ mongoose.connect(
 app.use(cors());
 app.use(express.json());
 
+// Rutas
 import usuarioRoutes from './usuario/usuario.routes'
 import productoRoutes from './producto/producto.routes'
+import pedidoRoutes from './pedido/pedido.routes'
+import restauranteRoutes from './restaurante/restaurante.routes'
 
 app.use('/usuario', usuarioRoutes)
 app.use('/producto', productoRoutes)
+app.use('/pedido', pedidoRoutes)
+app.use('/restaurante', restauranteRoutes)
 
 // Endpoint para 404
 app.use((req, res) => {
