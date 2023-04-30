@@ -1,4 +1,3 @@
-
 import Empanada from './empanada.model';
 
 export async function getEmpanada(req,res) {
