@@ -7,7 +7,7 @@ router.post('/', postPedido);
 // GET localhost:8080/pedido/noaceptado/
 router.get('/noaceptado/', getPedido3);
 
-// GET localhost:8080/pedido?user_id=13434&restaurant_id=2234324&delivery_id=11878
+// GET localhost:8080/pedido?user_id=13434&restaurant_id=2234324&delivery_id=11878&a_date=2023-04-30T10:15:30&b_date=2023-04-30T18:15:30
 router.get('/', getPedido2);
 
 // GET localhost:8080/pedido/644ead008c2578a099a9a309

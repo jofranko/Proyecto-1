@@ -25,11 +25,11 @@ export async function getPedido(req, res) {
 }
 
 //GET /pedido 2
-//El endpoint retorna los datos de los pedidos realizados por el usuario proveído, enviados por el usuario proveído, pedidos a un restaurante proveído
+//El endpoint retorna los datos de los pedidos realizados por el usuario proveído, enviados por el usuario proveído, pedidos a un restaurante proveído y/o entre las fechas proveídas
 export async function getPedido2(req, res) {
     try {
-        const { user_id, restaurant_id, delivery_id} = req.query;
-        const filter = {user_id: user_id, restaurant_id: restaurant_id, delivery_id: delivery_id, isDeleted: false};
+        const { user_id, restaurant_id, delivery_id, a_date, b_date} = req.query;
+        const filter = {user_id: user_id, restaurant_id: restaurant_id, delivery_id: delivery_id, createdAt: {$gte: new Date(a_date),$lte: new Date(b_date),}, isDeleted: false};
         const resultado = await PedidoModel.find(filter);
         res.status(200).json(resultado);
     } catch (err) {

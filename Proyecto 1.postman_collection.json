@@ -452,7 +452,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/pedido?user_id=13434&restaurant_id=2234324&delivery_id=11878",
+							"raw": "localhost:8080/pedido?user_id=13434&restaurant_id=2234324&delivery_id=11878&a_date=2023-04-30T10:15:30&b_date=2023-04-30T18:15:30",
 							"host": [
 								"localhost"
 							],
@@ -472,6 +472,14 @@
 								{
 									"key": "delivery_id",
 									"value": "11878"
+								},
+								{
+									"key": "a_date",
+									"value": "2023-04-30T10:15:30"
+								},
+								{
+									"key": "b_date",
+									"value": "2023-04-30T18:15:30"
 								}
 							]
 						}
